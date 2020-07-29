@@ -1,0 +1,31 @@
+
+<script>
+    $(document).ready(function () {
+        valores=new Array();
+        $('#Copiar').click(function () {
+            $('#res tr').each(function () {
+                var nombre = $(this).find('td').eq(0).html();
+                var apellido = $(this).find('td').eq(1).html();
+
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "copiar.php",
+                    data: "nombre=" + nombre + "&apellido=" + apellido,
+                    data: { valores: valores },
+                    success:function(r){
+					if(r==1){
+						alert("Agregado con exito");
+					}else{
+                        alert("Fallo el server");
+                        return false;
+					}
+				}
+                });
+            });
+            return false;
+        });
+    });
+
+
+</script>
